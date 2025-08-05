@@ -18,11 +18,12 @@ func embedYouTubeVideos(content string) string {
 		}
 		videoID := matches[1]
 		return fmt.Sprintf(
-			`<iframe width="560" height="315" src="https://www.youtube.com/embed/%s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,
+			`<div class="max-w-[560px] aspect-video w-full mx-auto my-4"><iframe class="w-full h-full" src="https://www.youtube.com/embed/%s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
 			videoID,
 		)
 	})
-	// Replace bare YouTube URLs
+
+	// Replace raw YouTube URLs
 	content = youtubeRegex.ReplaceAllStringFunc(content, func(url string) string {
 		matches := youtubeRegex.FindStringSubmatch(url)
 		if len(matches) < 2 {
@@ -30,7 +31,7 @@ func embedYouTubeVideos(content string) string {
 		}
 		videoID := matches[1]
 		return fmt.Sprintf(
-			`<iframe width="560" height="315" src="https://www.youtube.com/embed/%s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`,
+			`<div class="max-w-[560px] aspect-video w-full mx-auto my-4"><iframe class="w-full h-full" src="https://www.youtube.com/embed/%s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
 			videoID,
 		)
 	})
