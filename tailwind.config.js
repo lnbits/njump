@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Helvetica', 'ui-sans-serif', 'system-ui']
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         xs: '0.7rem',
@@ -13,9 +13,9 @@ module.exports = {
       },
       colors: {
         lavender: '#fdf0f5',
-        strongpink: '#e32a6d',
-        crimson: '#bc1150',
-        garnet: '#42091e'
+        strongpink: '#7dd3fc',
+        crimson: '#548ea8ff',
+        garnet: '#0f172a'
       },
       borderWidth: {
         '05rem': '0.5rem' // you can define custom border widths in rem units
