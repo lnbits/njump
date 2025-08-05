@@ -279,11 +279,14 @@ func renderEvent(w http.ResponseWriter, r *http.Request) {
 	} else if data.event.Kind == 30818 {
 		data.content = asciidocToHTML(data.content)
 	} else {
-		// first we run basicFormatting, which turns URLs into their appropriate HTML tags
-		data.content = basicFormatting(html.EscapeString(data.content), true, false, false)
-		// then we render quotes as HTML, which will also apply basicFormatting to all the internal quotes
-		data.content = renderQuotesAsHTML(ctx, data.content, data.templateId == TelegramInstantView)
-		// we must do this because inside <blockquotes> we must treat <img>s differently when telegram_instant_view
+		// Escape HTML first
+        data.content = html.EscapeString(data.content)
+        // Turn URLs into links, hashtags, etc.
+        data.content = basicFormatting(data.content, true, false, false)
+        // Inject YouTube videos
+        data.content = embedYouTubeVideos(data.content)
+        // Process quotes
+        data.content = renderQuotesAsHTML(ctx, data.content, data.templateId == TelegramInstantView)
 	}
 
 	w.Header().Set("Content-Type", "text/html")
